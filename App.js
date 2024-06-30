@@ -1,20 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { QueryClient, QueryClientProvider } from "react-query";
+import LoginScreen from "./components/loginScreen";
+import MainDashboard from "./components/MainDashboard";
+import StudexDashboard from "./components/StudexDashboard";
+import SearchStudex from "./components/SearchStudex";
+import Birthday from "./components/Birthday";
+import CustomSplash from "./components/CustomSplash";
 
-export default function App() {
+const Stack = createStackNavigator();
+const queryClient = new QueryClient();
+
+const App = () => {
+  const [appReady, setAppReady] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAppReady(true);
+    }, 9000);
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Hello world</Text>
-      <StatusBar style="auto" />
-    </View>
+    <QueryClientProvider client={queryClient}>
+      {appReady ? (
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="MainDashboard" component={MainDashboard} />
+            <Stack.Screen name="StudexDashboard" component={StudexDashboard} />
+            <Stack.Screen name="SearchStudex" component={SearchStudex} />
+            <Stack.Screen name="Birthday" component={Birthday} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      ) : (
+        <CustomSplash />
+      )}
+    </QueryClientProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

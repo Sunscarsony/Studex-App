@@ -9,10 +9,25 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~51.0.14",
+    "@react-native-async-storage/async-storage": "^1.23.1",
+    "@react-native-community/blur": "^4.4.0",
+    "@react-navigation/native": "^6.1.17",
+    "@react-navigation/stack": "^6.3.29",
+    "axios": "^1.7.2",
+    "expo": "~51.0.16",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
-    "react-native": "0.74.2"
+    "react-native": "0.74.2",
+    "react-native-animatable": "^1.4.0",
+    "react-native-gesture-handler": "^2.17.1",
+    "react-native-linear-gradient": "^2.8.3",
+    "react-native-modal": "^13.0.1",
+    "react-native-reanimated": "^3.12.1",
+    "react-query": "^3.39.3",
+    "expo-linear-gradient": "~13.0.2",
+    "react-dom": "18.2.0",
+    "react-native-web": "~0.19.10",
+    "@expo/metro-runtime": "~3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
