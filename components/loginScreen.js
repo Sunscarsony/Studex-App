@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -23,6 +24,7 @@ const LoginScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isLogin, setIsLogin] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const imageAnim = useRef(new Animated.Value(0)).current;
   const inputAnim = useRef(new Animated.Value(0)).current;
@@ -141,6 +143,10 @@ const LoginScreen = () => {
     }).start();
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Animated.Image
@@ -168,15 +174,25 @@ const LoginScreen = () => {
             placeholder={isLogin ? "Username" : "Email"}
             placeholderTextColor="#ccc"
           />
-          <TextInput
-            value={password}
-            onChangeText={setPassword}
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#ccc"
-            secureTextEntry
-          />
-                    <TouchableOpacity style={styles.button} onPress={isLogin ? handleLogin : handleSignUp}>
+          <View style={styles.passwordContainer}>
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              style={styles.input}
+              placeholder="Password"
+              placeholderTextColor="#ccc"
+              secureTextEntry={!showPassword}
+            />
+            <TouchableOpacity onPress={togglePasswordVisibility}>
+              <Icon
+                name={showPassword ? "eye-off" : "eye"}
+                size={24}
+                color="#ccc"
+                style={styles.eyeIcon}
+              />
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity style={styles.button} onPress={isLogin ? handleLogin : handleSignUp}>
             <Text style={styles.buttonText}>{isLogin ? "Login" : "Sign Up"}</Text>
           </TouchableOpacity>
         </Animated.View>
@@ -187,9 +203,6 @@ const LoginScreen = () => {
             </Text>
           </TouchableOpacity>
         </Animated.View>
-      </View>
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
-        <Text style={styles.footerText}>Designed by Royal Coders</Text>
       </View>
     </SafeAreaView>
   );
@@ -220,7 +233,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: "center",
     fontSize: 36,
-    fontWeight: 600,
+    fontWeight: "600",
     color: "#fff",
     marginBottom: 20,
   },
@@ -237,10 +250,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 20,
   },
+  passwordContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent:'center',
+    width: "100%",
+  },
+  eyeIcon: {
+    marginBottom:18,
+    marginLeft: -40,
+  },
   button: {
     backgroundColor: "blueviolet",
     width: "100%",
-    padding: 12,
+    padding: 15,
     borderRadius: 15,
     alignItems: "center",
   },
@@ -252,13 +275,6 @@ const styles = StyleSheet.create({
     color: "#ccc",
     marginTop: 20,
     fontSize: 16,
-  },
-  footerText: {
-    position: "absolute",
-    bottom: 20,
-    color: "#ccc",
-    fontSize: 12,
-    textAlign: "center",
   },
 });
 

@@ -107,10 +107,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   image: {
-    width: 300,
-    height: 160,
+    width: 280,
+    height: 150,
     marginBottom: 80,
-    marginTop: 30,
+    marginTop: 40,
   },
 });
 
