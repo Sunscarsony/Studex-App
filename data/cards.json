@@ -1,1 +1,10 @@
-
+{
+    "images": [
+      "../assets/carousel/img-1.avif",
+      "../assets/carousel/img-1.avif",
+      "../assets/carousel/img-1.avif",
+      "../assets/carousel/img-1.avif",
+      "../assets/carousel/img-1.avif",
+      "../assets/carousel/img-1.avif"
+    ]
+}
